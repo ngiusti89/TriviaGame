@@ -1,5 +1,4 @@
 /* background image */
-
 body {
   background-image: url(/assets/images/goodPlace.jpg);
   background-repeat: no-repeat;
@@ -9,19 +8,21 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
-/* container div */
+/* shows play again div at end of game */
+#reset {
+  visibility: visible;
+}
 
+/* container div */
 .container {
   text-align: center;
-  background: rgba(224, 251, 255, 0.7);
-  height: 500px;
+  background: rgba(255, 255, 255, 0.7);
   margin: 50px;
   padding: 15px;
   border-radius: 10px;
 }
 
 /* answer options */
-
 .selections {
   border-radius: 25px;
   width: 36%;
@@ -33,6 +34,15 @@ body {
   cursor: pointer;
 }
 
+/* time left div */
+#timeleft {
+  background: rgba(255, 255, 255, 0.5);
+  margin: 0 auto;
+  width: 50%;
+  line-height: 2;
+  border-radius: 10px;
+}
+
 /* gif image format */
 
 img {
@@ -40,43 +50,35 @@ img {
   width: auto;
 }
 
-/* shows play again div at end of game */
-
-#reset {
-  visibility: visible;
-}
-
 /* text */
-
-h1, h2, h4, p {
-  font-family: 'Raleway', sans-serif;
+h1 {
   text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 45px;
+}
+h2 {
+  font-size: 30px;
+}
+p {
+  color: red;
+  font-size: 32px;
+}
+h4 {
+  font-size: 24px;
 }
 
+/* timer */
 h3 {
   font-size: 30px;
   font-weight: normal;
 }
 
-h1 {
-  color: white;
-  font-weight: bold;
-  font-size: 45px;
-}
-
-p {
-  color: red;
-  font-size: 32px;
-}
-
 /* button */
-
 .button {
   background-color: green;
   color: white;
   font-size: 20px;
   padding: 15px;
   border-radius: 10px;
-  position: relative;
-  bottom: -80px;
 }

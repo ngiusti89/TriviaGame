@@ -45,7 +45,7 @@ $(document).ready(function () {
     },
     {
         question: "Who gets married in Season 1?",
-        choices: ["Janet and Jason", "Tahani and Jason", "Eleanor and Chidi", "Michael and Janet"],
+        choices: ["Janet & Jason", "Tahani & Jason", "Eleanor & \ Chidi", "Michael & Janet"],
         answer: 0,
         photo: "/assets/images/wedding.gif"
     }];
@@ -54,7 +54,7 @@ $(document).ready(function () {
     var rightCount = 0;
     var wrongCount = 0;
     var unansweredCount = 0;
-    var timer = 20;
+    var timer = 10;
     var running = false;
     var intervalId;
     var userGuess = "";
@@ -97,7 +97,7 @@ $(document).ready(function () {
             // stops timer
             stop();
             // displays correct answer
-            $("#answerDiv").html("<p>Time's up!<br>The correct answer is:<br>" + pick.choices[pick.answer] + "!</p>");
+            $("#answerDiv").html("<p>Time's up!<br><small>The correct answer is:</small> " + pick.choices[pick.answer] + "!</p>");
             // 
             hidepicture();
         }
@@ -147,7 +147,7 @@ $(document).ready(function () {
                 stop();
                 wrongCount++;
                 userGuess = "";
-                $("#answerDiv").html("<p>Oh no!<br>The correct answer is:<br>" + pick.choices[pick.answer] + "!</p>");
+                $("#answerDiv").html("<p>Oh no!<br><small>The correct answer is:</small> " + pick.choices[pick.answer] + "!</p>");
                 hidepicture();
             }
         })
@@ -161,14 +161,14 @@ $(document).ready(function () {
         // hides end of game content until needed
         var hidepic = setTimeout(function () {
             $("#answerDiv").empty();
-            timer = 20;
+            timer = 10;
 
             // show score tally after all questions have been asked
             if ((wrongCount + rightCount + unansweredCount) === questionsCount) {
                 // removes question from div
                 $("#questionDiv").empty();
                 // shows end of game text
-                $("#questionDiv").html("<h3>Game Over!  Here's how you did: </h3>");
+                $("#questionDiv").html("<h2>Game Over!<br><small>Here's how you did: </small></h2>");
                 $("#answerDiv").append("<h4> Correct: " + rightCount + "</h4>");
                 $("#answerDiv").append("<h4> Incorrect: " + wrongCount + "</h4>");
                 $("#answerDiv").append("<h4> Unanswered: " + unansweredCount + "</h4>");
@@ -177,13 +177,13 @@ $(document).ready(function () {
                 wrongCount = 0;
                 unansweredCount = 0;
 
-                // if questions remain, run timer and ask remaining questions
+            // if questions remain, run timer and ask remaining questions
             } else {
                 runTimer();
                 showQuestion();
 
             }
-            // wait three seconds until next question
+        // wait three seconds until next question
         }, 3000);
     }
 
