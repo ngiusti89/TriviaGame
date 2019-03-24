@@ -3,49 +3,49 @@ $(document).ready(function () {
     // trivia objects
     var triviaQuestions = [{
         question: "What network is The Good Place on?",
-        choice: ["CBS", "NBC", "ABC", "FOX"],
+        choices: ["CBS", "NBC", "ABC", "FOX"],
         answer: 1,
         photo: "/assets/images/NBC.gif"
     },
     {
         question: "What actress plays Eleanor?",
-        choice: ["Kristen Bell", "Kristen Stewart", "Kirsten Dunst", "Kristen Wiig"],
+        choices: ["Kristen Bell", "Kristen Stewart", "Kirsten Dunst", "Kristen Wiig"],
         answer: 0,
         photo: "/assets/images/EleanorNoice.gif"
     },
     {
         question: "Chidi was a professor of...",
-        choice: ["Philosophy", "Business", "Ethics", "Psychology"],
+        choices: ["Philosophy", "Business", "Ethics", "Psychology"],
         answer: 2,
         photo: "/assets/images/ChidiYes.gif"
     },
     {
         question: "Where does Janet live?",
-        choice: ["Space", "A Computer", "The Void", "Earth"],
+        choices: ["Space", "A Computer", "The Void", "Earth"],
         answer: 2,
         photo: "/assets/images/JanetYes.gif"
     },
     {
         question: "Who does Tahani's have an intense rivalry with?",
-        choice: ["Her cousin", "Her sister", "Her Mother", "Her neice"],
+        choices: ["Her cousin", "Her sister", "Her Mother", "Her neice"],
         answer: 1,
         photo: "/assets/images/TahaniYes.gif"
     },
     {
         question: "What type of food is most prevalent in The Good Place?",
-        choice: ["Pizza", "Ice Cream", "Frozen Yogurt", "Italian"],
+        choices: ["Pizza", "Ice Cream", "Frozen Yogurt", "Italian"],
         answer: 2,
         photo: "/assets/images/frozenYogurt.gif"
     },
     {
         question: "What form of transportation is used in The Good Place?",
-        choice: ["Hyperwarp", "Spaceship", "Bicycle", "Train"],
+        choices: ["Hyperwarp", "Spaceship", "Bicycle", "Train"],
         answer: 3,
         photo: "/assets/images/trains.gif"
     },
     {
         question: "Who gets married in Season 1?",
-        choice: ["Janet and Jason", "Tahani and Jason", "Eleanor and Chidi", "Michael and Janet"],
+        choices: ["Janet and Jason", "Tahani and Jason", "Eleanor and Chidi", "Michael and Janet"],
         answer: 0,
         photo: "/assets/images/wedding.gif"
     }];
@@ -67,118 +67,131 @@ $(document).ready(function () {
     // hides "play again"
     $("#reset").hide();
 
-    //click start button to start game (hides start button, displays question, starts timer)
-    $("#start").click( function(){
+    // click start button to start game (hides start button, displays question, starts timer)
+    $("#start").click(function () {
         $("#start").hide();
         showQuestion();
         runTimer();
+
         for (var i = 0; i < triviaQuestions.length; i++) {
             holder.push(triviaQuestions[i]);
         }
     })
 
-    //start timer
+    // start timer, countdown by second
     function runTimer() {
         if (!running) {
             intervalId = setInterval(decrement, 1000);
             running = true;
         }
     }
-    //timer countdown
+    // timer countdown
     function decrement() {
+        // display countdown in div
         $("#timeleft").html("<h3>Time left: " + timer + "</h3>");
         timer--;
-        //if timer reaches zero
+        // if timer reaches zero
         if (timer === 0) {
+            // adds to tally of unanswered questions
             unansweredCount++;
+            // stops timer
             stop();
-            $("#result").html("<p>Time's up! The correct answer is:<br>" + pick.choice[pick.answer] + "!</p>");
+            // displays correct answer
+            $("#answerDiv").html("<p>Time's up!<br>The correct answer is:<br>" + pick.choices[pick.answer] + "!</p>");
+            // 
             hidepicture();
         }
     }
-    //stop timer
+    // stop timer
     function stop() {
         running = false;
         clearInterval(intervalId);
     }
 
-    //pick question at random
-    //displays question and possible answers
+    // pick question at random and displays question and possible answers
     function showQuestion() {
-        
+        // generate random index in array
         index = Math.floor(Math.random() * triviaQuestions.length);
         pick = triviaQuestions[index];
+        // console log displayed object properties
+        console.log(pick.question, pick.choices, pick.answer, index)
 
-        
-        $("#choices").html("<h2>" + pick.question + "</h2>");
-        for (var i = 0; i < pick.choice.length; i++) {
-            var userChoice = $("<div>");
-            userChoice.addClass("answerchoice");
-            userChoice.html(pick.choice[i]);
-            
-            userChoice.attr("data-guessvalue", i);
-            $("#result").append(userChoice);
-            //		}
+        // display question in div
+        $("#questionDiv").html("<h2>" + pick.question + "</h2>");
+        // iterate through answer array and display in div
+        for (var i = 0; i < pick.choices.length; i++) {
+            var userchoices = $("<div>");
+            userchoices.addClass("selections");
+            userchoices.html(pick.choices[i]);
+            userchoices.attr("data-guessvalue", i);
+            $("#answerDiv").append(userchoices);
+            // answer position in array
         }
 
-        //click function to select answer and outcomes
-        $(".answerchoice").click( function(){
-            
+        // click guess answer
+        $(".selections").click(function () {
+            // grab answer position in array
             userGuess = parseInt($(this).attr("data-guessvalue"));
 
-            //correct guess or wrong guess outcomes
+            // if user guess right or wrong
+            // if right: stop timer, add to right answer tally, display correct! text and picture
             if (userGuess === pick.answer) {
                 stop();
                 rightCount++;
                 userGuess = "";
-                $("#result").html("<p>Correct!</p>");
+                $("#answerDiv").html("<p>Correct!</p>");
                 hidepicture();
 
+                // if wrong: stop timer, add to wrong answer tally, display oh no! text and picture
             } else {
                 stop();
                 wrongCount++;
                 userGuess = "";
-                $("#result").html("<p>Wrong! The correct answer is:<br>" + pick.choice[pick.answer] + "!</p>");
+                $("#answerDiv").html("<p>Oh no!<br>The correct answer is:<br>" + pick.choices[pick.answer] + "!</p>");
                 hidepicture();
             }
         })
     }
-
+    // show and hide photo when needed
     function hidepicture() {
-        $("#result").append("<img src=" + pick.photo + ">");
+        $("#answerDiv").append("<img src=" + pick.photo + ">");
         newArray.push(pick);
         triviaQuestions.splice(index, 1);
 
-        var hidpic = setTimeout(function () {
-            $("#result").empty();
+        // hides end of game content until needed
+        var hidepic = setTimeout(function () {
+            $("#answerDiv").empty();
             timer = 20;
 
-            //run the score screen if all questions answered
+            // show score tally after all questions have been asked
             if ((wrongCount + rightCount + unansweredCount) === questionsCount) {
-                $("#choices").empty();
-                $("#choices").html("<h3>Game Over!  Here's how you did: </h3>");
-                $("#result").append("<h4> Correct: " + rightCount + "</h4>");
-                $("#result").append("<h4> Incorrect: " + wrongCount + "</h4>");
-                $("#result").append("<h4> Unanswered: " + unansweredCount + "</h4>");
+                // removes question from div
+                $("#questionDiv").empty();
+                // shows end of game text
+                $("#questionDiv").html("<h3>Game Over!  Here's how you did: </h3>");
+                $("#answerDiv").append("<h4> Correct: " + rightCount + "</h4>");
+                $("#answerDiv").append("<h4> Incorrect: " + wrongCount + "</h4>");
+                $("#answerDiv").append("<h4> Unanswered: " + unansweredCount + "</h4>");
                 $("#reset").show();
                 rightCount = 0;
                 wrongCount = 0;
                 unansweredCount = 0;
 
+                // if questions remain, run timer and ask remaining questions
             } else {
                 runTimer();
                 showQuestion();
 
             }
+            // wait three seconds until next question
         }, 3000);
-
-
     }
 
-    $("#reset").click( function(){
+    // resets game when click Play again
+    $("#reset").click(function () {
         $("#reset").hide();
-        $("#result").empty();
-        $("#choices").empty();
+        $("#answerDiv").empty();
+        $("#questionDiv").empty();
         for (var i = 0; i < holder.length; i++) {
             triviaQuestions.push(holder[i]);
         }
