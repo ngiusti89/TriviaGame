@@ -5,49 +5,49 @@ $(document).ready(function () {
         question: "What network is The Good Place on?",
         choices: ["CBS", "NBC", "ABC", "FOX"],
         answer: 1,
-        photo: "/assets/images/NBC.gif"
+        photo: "./assets/images/NBC.gif"
     },
     {
         question: "What actress plays Eleanor?",
         choices: ["Kristen Bell", "Kristen Stewart", "Kirsten Dunst", "Kristen Wiig"],
         answer: 0,
-        photo: "/assets/images/EleanorNoice.gif"
+        photo: "./assets/images/EleanorNoice.gif"
     },
     {
         question: "Chidi was a professor of...",
         choices: ["Philosophy", "Business", "Ethics", "Psychology"],
         answer: 2,
-        photo: "/assets/images/ChidiYes.gif"
+        photo: "./assets/images/ChidiYes.gif"
     },
     {
         question: "Where does Janet live?",
         choices: ["Space", "A Computer", "The Void", "Earth"],
         answer: 2,
-        photo: "/assets/images/JanetYes.gif"
+        photo: "./assets/images/JanetYes.gif"
     },
     {
         question: "Who does Tahani's have an intense rivalry with?",
         choices: ["Her cousin", "Her sister", "Her Mother", "Her neice"],
         answer: 1,
-        photo: "/assets/images/TahaniYes.gif"
+        photo: "./assets/images/TahaniYes.gif"
     },
     {
         question: "What type of food is most prevalent in The Good Place?",
         choices: ["Pizza", "Ice Cream", "Frozen Yogurt", "Italian"],
         answer: 2,
-        photo: "/assets/images/frozenYogurt.gif"
+        photo: "./assets/images/frozenYogurt.gif"
     },
     {
         question: "What form of transportation is used in The Good Place?",
         choices: ["Hyperwarp", "Spaceship", "Bicycle", "Train"],
         answer: 3,
-        photo: "/assets/images/trains.gif"
+        photo: "./assets/images/trains.gif"
     },
     {
         question: "Who gets married in Season 1?",
         choices: ["Janet & Jason", "Tahani & Jason", "Eleanor & \ Chidi", "Michael & Janet"],
         answer: 0,
-        photo: "/assets/images/wedding.gif"
+        photo: "./assets/images/wedding.gif"
     }];
 
     // variables
