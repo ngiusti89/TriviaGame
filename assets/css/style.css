@@ -1,0 +1,67 @@
+/* background image */
+body{
+	background-image: url(/assets/images/goodPlace.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+}
+
+/* container div */
+.container {
+    background: rgba(224, 251, 255, 0.7);
+    height: 500px;
+    margin: 50px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* answer options */
+.answerchoice {
+  border-radius: 25px;
+  width: 36%;
+  line-height: 1.5; 
+  padding: 5px;
+  margin: 10px auto;
+  font-size: 20px;
+  background-color: white;
+  cursor: pointer;
+}
+
+/* gif image format */
+img {
+  max-height: 200px;
+  width: auto;
+}
+
+/* shows play again div at end of game */
+#reset {
+  visibility: visible;
+}
+
+/* text */
+h1, h2, h4, p {
+  font-family: 'Raleway', sans-serif;
+}
+h1 {
+  color: white;
+  font-weight: bold;
+  font-size: 45px;
+}
+p {
+  color: red;
+  font-size: 32px;
+}
+
+/* button */
+.button {
+  background-color: green;
+  color: white;
+  font-size: 20px;
+  padding:  15px;
+  border-radius: 10px;
+  position: relative;
+  bottom: -80px;
+}
